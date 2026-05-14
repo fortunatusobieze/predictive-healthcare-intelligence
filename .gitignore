@@ -27,3 +27,4 @@ mlruns/
 .idea/
 .DS_Store
 Thumbs.db
+.env
