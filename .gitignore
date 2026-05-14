@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# Data
+data/raw/
+data/processed/
+data/interim/
+
+# Models and outputs
+models/
+outputs/
+
+# MLflow artifacts
+mlruns/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
