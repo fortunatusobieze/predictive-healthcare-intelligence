@@ -25,3 +25,6 @@ mlruns/
 .DS_Store
 Thumbs.db
 .env
+
+echo "mlflow.db" >> .gitignore
+echo "mlruns/" >> .gitignore
