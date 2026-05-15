@@ -1,0 +1,25 @@
+{
+  "target_column": "unplanned_readmission_30d",
+  "dropped_columns": [
+    "admission_date",
+    "admission_id",
+    "attending_physician_id",
+    "avoidable_readmission_30d",
+    "date_of_birth",
+    "discharge_date",
+    "index_admission_date",
+    "index_discharge_date",
+    "patient_id",
+    "readmission_reason_x",
+    "readmission_reason_y",
+    "readmitted_30d",
+    "readmitted_within_30d",
+    "registered_date",
+    "unplanned_readmission_30d"
+  ],
+  "n_rows": 8500,
+  "n_original_columns": 65,
+  "n_model_features": 50,
+  "n_numeric_features": 39,
+  "n_categorical_features": 11
+}

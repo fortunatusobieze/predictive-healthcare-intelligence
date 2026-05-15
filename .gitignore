@@ -12,12 +12,9 @@ env/
 
 # Data
 data/raw/
-data/processed/
-data/interim/
 
 # Models and outputs
 models/
-outputs/
 
 # MLflow artifacts
 mlruns/

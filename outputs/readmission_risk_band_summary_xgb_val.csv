@@ -1,0 +1,4 @@
+risk_band,n_patients,readmissions,readmission_rate
+high,170,55,0.3235294117647059
+low,1190,170,0.14285714285714285
+medium,340,93,0.2735294117647059

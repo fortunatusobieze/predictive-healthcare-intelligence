@@ -1,0 +1,8 @@
+{
+  "top_pct": 0.2,
+  "cutoff_n": 340,
+  "precision_at_top_pct": 0.31470588235294117,
+  "recall_at_top_pct": 0.33647798742138363,
+  "positives_captured": 107,
+  "positives_total": 318
+}
