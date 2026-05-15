@@ -46,7 +46,6 @@ def load_ed_forecast_for_hospital(hospital_safe_name: str):
 # Readmission page
 # -----------------------
 
-
 def show_readmission_page():
     st.title("Readmission risk intelligence")
     st.caption(
@@ -78,22 +77,12 @@ def show_readmission_page():
     band_summary = load_risk_band_summary()
     scores = load_risk_scores()
 
-    # Safely compute low/high band rates with defaults
-    def _get_band_rate(df, band_name, default=0.0):
-        ser = df.loc[df["risk_band"] == band_name, "readmission_rate"]
-        if len(ser) == 0:
-            return default
-        return float(ser.iloc[0])
-
-    low_rate = _get_band_rate(band_summary, "low", default=0.0)
-    high_rate = _get_band_rate(band_summary, "high", default=0.0)
-    lift = high_rate / low_rate if low_rate > 0 else float("nan")
-
-    st.caption(
-        f"In this validation set, the high-risk band has a readmission rate of "
-        f"{high_rate*100:.1f}% versus {low_rate*100:.1f}% in the low-risk band "
-        f"(~{lift:.1f}× higher)."
+    # Ensure consistent band ordering
+    band_order = ["low", "medium", "high"]
+    band_summary["risk_band"] = pd.Categorical(
+        band_summary["risk_band"], categories=band_order, ordered=True
     )
+    band_summary = band_summary.sort_values("risk_band")
 
     # ---------------- Performance KPIs ----------------
     st.subheader("Model performance overview")
@@ -170,12 +159,15 @@ def show_readmission_page():
             use_container_width=True,
         )
 
-    low_rate = float(
-        band_summary.loc[band_summary["risk_band"] == "low", "readmission_rate"]
-    )
-    high_rate = float(
-        band_summary.loc[band_summary["risk_band"] == "high", "readmission_rate"]
-    )
+    # Robust computation of low/high band rates
+    def _get_band_rate(df, band_name, default=0.0):
+        ser = df.loc[df["risk_band"] == band_name, "readmission_rate"]
+        if len(ser) == 0:
+            return default
+        return float(ser.iloc[0])
+
+    low_rate = _get_band_rate(band_summary, "low", default=0.0)
+    high_rate = _get_band_rate(band_summary, "high", default=0.0)
     lift = high_rate / low_rate if low_rate > 0 else float("nan")
 
     st.caption(
@@ -267,6 +259,7 @@ def show_readmission_page():
             st.image(str(shap_beeswarm_path), use_column_width=True)
         else:
             st.info("SHAP beeswarm plot not found in outputs/.")
+
 
 # -----------------------
 # ED forecast page
